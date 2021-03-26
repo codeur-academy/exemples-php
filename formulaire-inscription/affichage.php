@@ -1,4 +1,14 @@
 <?
- $liste_apprenants[0] = $_GET["nom"] 
+ // Traitement
+
+ // Enregistrement du nom dans le tableau
+ $liste_apprenants[] = $_GET["nom"] 
 ?>
- <?= $liste_apprenants[0] ?>
+
+<!-- Affichage -->
+
+<?
+    foreach ($liste_apprenants as $value) {
+     echo $value;
+    }
+?>

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="affichage.php" >
+    <form action="affichage.php" target="_blank" method="get" >
         <label for="" >Nom</label>
         <input name="nom" type="text">
         <button type="submit">Enregistrer</button>
