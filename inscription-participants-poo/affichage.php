@@ -1,4 +1,6 @@
 <?php
+
+require("./participant.php");
  //
  //  Traitement
 
@@ -9,17 +11,20 @@
  $liste_participants = [];
 
  // Trouver ou créer le tableau dans Session
- if( isset( $_SESSION['liste_participants'] ) ) {
-    $liste_participants =  $_SESSION['liste_participants'] ;
+ if( isset( $_SESSION['liste_participants_objects'] ) ) {
+    $liste_participants =  $_SESSION['liste_participants_objects'] ;
  }else {
-    $_SESSION['liste_participants'] =  $liste_participants;
+    $_SESSION['liste_participants_objects'] =  $liste_participants;
  }
 
- // Ajouter le nom du nom dans le tableau
- $liste_participants[] = $_GET["nom"] ;
+ // Création d'un nouveau participant
+ $participant = new Participant;
+ $participant->setNom($_GET["nom"]);
+ $participant->setPrenom($_GET["prenom"]);
+ $liste_participants[] = $participant ;
 
  // Enregistrer le tableau dans la session
-$_SESSION['liste_participants'] =  $liste_participants;
+$_SESSION['liste_participants_objects'] =  $liste_participants;
 
 ?>
 
@@ -38,10 +43,11 @@ $_SESSION['liste_participants'] =  $liste_participants;
     <?php
         foreach ($liste_participants as $value) { 
         ?>
-        <li><?php echo $value ?></li>
-        <?php
-        }
-    ?>  
+        <li>
+            <?php echo ($value->getNom()) ?> , 
+            <?php echo ($value->getPrenom()) ?> 
+        </li>
+        <?php } ?>  
 </ul>
 </body>
 </html>
