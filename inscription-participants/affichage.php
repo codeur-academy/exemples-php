@@ -5,20 +5,20 @@
  session_start();
 
  // Initialisation du tableau des participants
- $liste_apprenants = [];
+ $liste_participants = [];
 
  // Trouver ou créer le tableau dans Session
- if( isset( $_SESSION['counter'] ) ) {
-    $liste_apprenants =  $_SESSION['counter'] ;
+ if( isset( $_SESSION['liste_participants'] ) ) {
+    $liste_participants =  $_SESSION['liste_participants'] ;
  }else {
-    $_SESSION['counter'] =  $liste_apprenants;
+    $_SESSION['liste_participants'] =  $liste_participants;
  }
 
  // Ajouter le nom du nom dans le tableau
- $liste_apprenants[] = $_GET["nom"] ;
+ $liste_participants[] = $_GET["nom"] ;
 
  // Enregistrer le tableau dans la session
-$_SESSION['counter'] =  $liste_apprenants;
+$_SESSION['liste_participants'] =  $liste_participants;
 
 ?>
 
@@ -35,7 +35,7 @@ $_SESSION['counter'] =  $liste_apprenants;
 <h1>Liste des participants</h1>
 <ul>
     <?
-        foreach ($liste_apprenants as $value) { 
+        foreach ($liste_participants as $value) { 
         ?>
         <li><?=$value?></li>
         <?
