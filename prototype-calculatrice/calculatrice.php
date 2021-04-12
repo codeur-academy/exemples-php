@@ -1,0 +1,88 @@
+<?php
+    $x = null;
+    $y = null;
+    $operation = null;
+    $operationValue = null;
+    $afficheur = "";
+    if (!empty($_POST)) {
+      
+        if(isset($_POST['x'])){
+            $x = $_POST['x'];
+        }
+        if(isset($_POST['y'])){
+            $y = $_POST['y'];
+        }
+        if(isset($_POST['operationValue'])){
+            $operationValue = $_POST['operationValue'];
+        }
+
+        if(isset($_POST['operation'])){
+            $operation = $_POST['operation'];
+           
+            if($operation == "="){
+                $solution = null;
+                switch($operationValue){
+
+                    case "+" : $solution = $x + $y;
+                        break;
+                    case "-" : $solution = $x - $y;
+                        break;
+
+                }
+                $afficheur = $solution;
+            }else{
+                $operationValue = $operation;
+
+            }
+
+        }else{
+
+            if(isset($_POST['nombre'])){
+                $nombre = $_POST['nombre'];
+                if($operation == null){
+                    if($x == null) $x = $nombre;
+                    else $x = floatval($x . $nombre);
+                }else{
+                    if($y == null) $y = $nombre;
+                    else $y = floatval($y . $nombre);
+                }
+               
+
+            }
+
+            if($x != null) $afficheur = $afficheur . "$x" ;
+            if($operation != null) $afficheur .= " " .  $operation . " ";
+            if($y != null) $afficheur .= $y;
+       
+        }
+       
+
+
+    }
+     
+?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype calculatrice</title>
+</head>
+<body>
+<form action="" method="post">
+    <input type="text" name="x" value="<?php echo $x ?>">
+    <input type="text" name="y" value="<?php echo $y ?>">
+    <input type="text" name="operationValue" value="<?php echo $operation ?>">
+    <input type="text" id="afficheur" name="afficheur" value="<?php echo $afficheur ?>" />
+    <input type="submit" name="nombre" value="1"  ></input>
+    <input type="submit" name="nombre" value="2"  ></input>
+    <input type="submit" name="nombre" value="3"  ></input>
+    <input type="submit" name="operation" value="+"  ></input>
+    <input type="submit" name="operation" value="-"  ></input>
+    <input type="submit" name="operation" value="="  ></input>
+    <input type="submit" name="operation" value="c"  ></input>
+</form>
+    
+</body>
+</html>
