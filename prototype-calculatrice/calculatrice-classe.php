@@ -1,4 +1,30 @@
 <?php
+
+class Calculatrice{
+    private $x;
+    private $y;
+    private $operation;
+
+    function __construct($a,$b,$operation) {
+        $this->x = $a;
+        $this->y = $b;
+        $this->operation = $operation;
+    }
+ 
+    function calculer(){
+        $solution = null;
+        switch($this->operation){
+            case "+" : $solution = $this->x + $this->y;
+                break;
+            case "-" : $solution = $this->x - $this->y;
+                break;
+        }
+        return $solution;
+    } 
+
+}
+   
+
     // Initialisation des variables
     $x = null;
     $y = null;
@@ -29,12 +55,9 @@
         $egale = $_POST['egale'];
     
         // Calcule
-        switch($operation){
-            case "+" : $solution = $x + $y;
-                break;
-            case "-" : $solution = $x - $y;
-                break;
-        }
+        $calculatrice = new Calculatrice($x,$y,$operation);
+        $solution = $calculatrice->calculer($x,$y,$operation);
+      
     }
     // Affichage 
     if($solution != null) $afficheur = $solution;

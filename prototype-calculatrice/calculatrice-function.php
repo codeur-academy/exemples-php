@@ -1,4 +1,16 @@
 <?php
+
+    function calculer($x,$y,$operation){
+        $solution = null;
+        switch($operation){
+            case "+" : $solution = $x + $y;
+                break;
+            case "-" : $solution = $x - $y;
+                break;
+        }
+        return $solution;
+    }
+
     // Initialisation des variables
     $x = null;
     $y = null;
@@ -29,12 +41,8 @@
         $egale = $_POST['egale'];
     
         // Calcule
-        switch($operation){
-            case "+" : $solution = $x + $y;
-                break;
-            case "-" : $solution = $x - $y;
-                break;
-        }
+        $solution = calculer($x,$y,$operation);
+      
     }
     // Affichage 
     if($solution != null) $afficheur = $solution;
