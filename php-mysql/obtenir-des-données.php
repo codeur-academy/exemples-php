@@ -1,31 +1,22 @@
 <?php
-   $dbhost = 'localhost:3036';
+   $dbhost = 'localhost:3306';
    $dbuser = 'root';
-   $dbpass = 'rootpassword';
+   $dbpass = 'admin';
    
-   $conn = mysql_connect($dbhost, $dbuser, $dbpass);
-   
-   if(! $conn ) {
-      die('Could not connect: ' . mysql_error());
+   $mysqli = new mysqli($dbhost, $dbuser, $dbpass, "productsmanager");
+   if ($mysqli->connect_errno) {
+      echo "Échec lors de la connexion à MySQL : (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
    }
-   
-   $sql = 'SELECT emp_id, emp_name, emp_salary FROM employee';
-   mysql_select_db('test_db');
-   $retval = mysql_query( $sql, $conn );
-   
-   if(! $retval ) {
-      die('Could not get data: ' . mysql_error());
+
+   $res = $mysqli->query("SELECT * FROM productsmanager.products");
+
+
+   $res->data_seek(0);
+   while ($row = $res->fetch_assoc()) {
+      echo " id = " . $row['Id'] . "\n";
+      echo " price = " . $row['Price'] . "\n";
+      echo " title = " . $row['Title'] . "\n";
    }
-   
-   while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
-      echo "EMP ID :{$row['emp_id']}  <br> ".
-         "EMP NAME : {$row['emp_name']} <br> ".
-         "EMP SALARY : {$row['emp_salary']} <br> ".
-         "--------------------------------<br>";
-   }
-   
-   mysql_free_result($retval);
-   echo "Fetched data successfully\n";
-   
-   mysql_close($conn);
+
+
 ?>
