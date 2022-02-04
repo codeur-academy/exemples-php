@@ -8,7 +8,7 @@
    
  
 if(! $conn ) {
-   die('Could not connect: ' . mysql_error());
+   die('Could not connect: ' . mysql_error() );
 }
  echo "Connected successfully";
 ?>
