@@ -1,7 +1,8 @@
 <?php
-    // Trouver tous les employés depuis le fichier JSON  
-    $employesFile = file_get_contents('employes.json');
-    $employes = json_decode($employesFile);
+    include "GestionEmployes.php";
+    // Trouver tous les employés depuis la base de données 
+    $gestionEmployes = new GestionEmployes();
+    $employes = $gestionEmployes->RechercherTous();
 ?>
 
 
@@ -22,15 +23,20 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Date de naissance</th>
+                <th></th>
             </tr>
             <?php
                     foreach($employes as $employe){
             ?>
 
             <tr>
-                <td><?= $employe[1]?></td>
-                <td><?= $employe[2]?></td>
-                <td><?= $employe[3]?></td>
+                <td><?= $employe->getNom() ?></td>
+                <td><?= $employe->getPrenom() ?></td>
+                <td><?= $employe->getDateNaissance() ?></td>
+                <td>
+                    <a href="editer.php?id=<?php echo $employe->getId() ?>">Éditer</a>
+                    <a href="supprimer.php?id=<?php echo $employe->getId() ?>">Supprime</a>
+                </td>
             </tr>
             <?php }?>
         </table>
