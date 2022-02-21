@@ -1,44 +1,40 @@
 <?php
-    $getfile = file_get_contents('people.json');
-    $data = json_decode($getfile);
+    // Trouver tous les employés depuis le fichier JSON  
+    $employesFile = file_get_contents('employes.json');
+    $employes = json_decode($employesFile);
 ?>
 
 
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Gestion des employés</title>
 </head>
 <body>
     <div>
-        <a href="insert.php">Insert Data</a>
+        <a href="ajouter.php">Ajouter un employé</a>
         <table>
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Action</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date de naissance</th>
+                <th></th>
             </tr>
-
             <?php
-                    foreach($data as $person){
-
+                    foreach($employes as $employe){
             ?>
 
             <tr>
-                <td><?= $person[1]?></td>
-                <td><?= $person[2]?></td>
-                <td><?= $person[3]?></td>
-                <td><?= $person[4]?></td>
+                <td><?= $employe[1]?></td>
+                <td><?= $employe[2]?></td>
+                <td><?= $employe[3]?></td>
                 <td>
-                    <a href="edit.php?id=<?php echo $person[0] ?>">Edit</a>
-                    <a href="delete.php?id=<?php echo $person[0] ?>">delete</a>
+                    <a href="editer.php?id=<?php echo $employe[0] ?>">Éditer</a>
+                    <a href="supprimer.php?id=<?php echo $employe[0] ?>">Supprime</a>
                 </td>
             </tr>
             <?php }?>
